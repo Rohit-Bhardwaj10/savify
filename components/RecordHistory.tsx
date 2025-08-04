@@ -1,5 +1,5 @@
-import getRecords from '@/app/actions/getRecords';
-import RecordItem from './RecordItem';
+import getRecords from '@/app/actions/getrecords';
+import RecordItem from './recorditem';
 import { Record } from '@/types/Record';
 
 const RecordHistory = async () => {
