@@ -1,97 +1,109 @@
 import React from 'react';
 import getUserRecord from '@/app/actions/getuserrecord';
 import getBestWorstExpense from '@/app/actions/getbestworstexpense';
+import getRecords from '@/app/actions/getrecords';
 
 const ExpenseStats = async () => {
     try {
-        // Fetch both average and range data
-        const [userRecordResult, rangeResult] = await Promise.all([
+        const [userRecordResult, rangeResult, recordsResult] = await Promise.all([
             getUserRecord(),
             getBestWorstExpense(),
+            getRecords(),
         ]);
 
         const { record, daysWithRecords } = userRecordResult;
         const { bestExpense, worstExpense } = rangeResult;
+        const { records } = recordsResult;
 
-        // Calculate average expense
-        const validRecord = record || 0;
-        const validDays =
-            daysWithRecords && daysWithRecords > 0 ? daysWithRecords : 1;
-        const averageExpense = validRecord / validDays;
+        // Calculate average
+        const totalAmount = record || 0;
+        const validDays = daysWithRecords && daysWithRecords > 0 ? daysWithRecords : 1;
+        const averageExpense = totalAmount / validDays;
+
+        // Calculate Category Distribution
+        const categoryMap: Record<string, number> = {};
+        records?.forEach(r => {
+            categoryMap[r.category] = (categoryMap[r.category] || 0) + r.amount;
+        });
+
+        const sortedCategories = Object.entries(categoryMap)
+            .sort(([, a], [, b]) => b - a)
+            .slice(0, 3);
 
         return (
-            <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl'>
-                <div className='flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6'>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                        <span className='text-white text-sm sm:text-lg'>📊</span>
+            <div className='glass p-6 rounded-[2rem] border border-zinc-800/50'>
+                <div className='flex items-center gap-4 mb-8 text-white px-2'>
+                    <div className='w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]'>
+                        <span className='text-black text-xl font-bold'>Σ</span>
                     </div>
                     <div>
-                        <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                            Expense Statistics
+                        <h3 className='text-xl font-black tracking-tight uppercase'>
+                            Fiscal Metrics
                         </h3>
-                        <p className='text-xs text-gray-500 dark:text-gray-400 mt-0.5'>
-                            Your spending insights and ranges
+                        <p className='text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest mt-1'>
+                            Algorithmic Analysis // V.2.0
                         </p>
                     </div>
                 </div>
 
-                <div className='space-y-3 sm:space-y-4'>
+                <div className='space-y-6'>
+                    {/* Distribution Breakdown */}
+                    <div className='px-2'>
+                        <div className='text-[10px] font-mono font-black text-zinc-700 uppercase tracking-[0.2em] mb-4'>[ CATEGORY_DOMINANCE ]</div>
+                        <div className='space-y-4'>
+                            {sortedCategories.map(([cat, amt]) => (
+                                <div key={cat} className='group'>
+                                    <div className='flex justify-between items-end mb-1.5'>
+                                        <span className='text-[10px] font-bold text-zinc-400 uppercase tracking-widest group-hover:text-white transition-colors'>{cat}</span>
+                                        <span className='text-[10px] font-mono font-bold text-zinc-500'>${amt.toFixed(2)}</span>
+                                    </div>
+                                    <div className='w-full h-1 bg-zinc-900 rounded-full overflow-hidden'>
+                                        <div 
+                                            className='h-full bg-zinc-500 rounded-full transition-all duration-1000 group-hover:bg-zinc-200' 
+                                            style={{ width: `${(amt / (totalAmount || 1)) * 100}%` }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                            {sortedCategories.length === 0 && (
+                                <p className='text-[10px] font-mono text-zinc-700 italic'>No categorization data detected...</p>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className='h-px bg-zinc-800/50 mx-2'></div>
+
                     {/* Average Daily Spending */}
-                    <div className='bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-xl p-3 sm:p-4 border border-gray-200/50 dark:border-gray-600/50'>
+                    <div className='bg-zinc-950/50 rounded-2xl p-6 border border-zinc-800/50 shadow-inner group transition-all hover:border-zinc-700'>
                         <div className='text-center'>
-                            <p className='text-xs font-medium text-gray-600 dark:text-gray-300 mb-2 tracking-wide uppercase'>
-                                Average Daily Spending
+                            <p className='text-[9px] font-bold text-zinc-600 mb-2 tracking-[0.3em] uppercase'>
+                                Daily Flux Capacity
                             </p>
-                            <div className='text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2'>
+                            <div className='text-4xl font-black tracking-tighter text-white mb-3'>
                                 ${averageExpense.toFixed(2)}
                             </div>
-                            <div className='inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-2 py-1 rounded-full text-xs font-medium'>
-                                <span className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full'></span>
-                                Based on {validDays} days with expenses
+                            <div className='inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 rounded-full border border-zinc-800 group-hover:border-zinc-600 transition-colors'>
+                                <span className='w-1 h-1 bg-zinc-100 rounded-full animate-pulse'></span>
+                                <span className='text-[9px] font-bold text-zinc-400 group-hover:text-zinc-200 uppercase tracking-widest'>
+                                    {validDays} Cycles Validated
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     {/* Expense Range */}
-                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3'>
-                        {/* Highest Expense */}
-                        <div className='bg-red-50/80 dark:bg-red-900/20 backdrop-blur-sm p-3 sm:p-4 rounded-xl border-l-4 border-l-red-500 hover:bg-red-50 dark:hover:bg-red-900/30'>
-                            <div className='flex items-center gap-2'>
-                                <div className='w-6 h-6 bg-red-100 dark:bg-red-800 rounded-xl flex items-center justify-center flex-shrink-0'>
-                                    <span className='text-sm leading-none text-red-600 dark:text-red-300 font-bold'>
-                                        ↑
-                                    </span>
-                                </div>
-                                <div className='flex-1'>
-                                    <h4 className='font-bold text-gray-900 dark:text-gray-100 text-xs mb-0.5'>
-                                        Highest
-                                    </h4>
-                                    <p className='text-lg font-bold text-red-600 dark:text-red-300'>
-                                        {bestExpense !== undefined ? `$${bestExpense}` : 'No data'}
-                                    </p>
-                                </div>
-                            </div>
+                    <div className='grid grid-cols-2 gap-4 px-2'>
+                        <div className='group'>
+                            <span className='text-[9px] font-black text-zinc-700 uppercase tracking-[0.2em] block mb-1'>PEAK_ENTRY</span>
+                            <p className='text-lg font-bold text-white tracking-widest'>
+                                {bestExpense !== undefined ? `$${bestExpense}` : '—'}
+                            </p>
                         </div>
-
-                        {/* Lowest Expense */}
-                        <div className='bg-green-50/80 dark:bg-green-900/20 backdrop-blur-sm p-3 sm:p-4 rounded-xl border-l-4 border-l-green-500 hover:bg-green-50 dark:hover:bg-green-900/30'>
-                            <div className='flex items-center gap-2'>
-                                <div className='w-6 h-6 bg-green-100 dark:bg-green-800 rounded-xl flex items-center justify-center flex-shrink-0'>
-                                    <span className='text-sm leading-none text-green-600 dark:text-green-300 font-bold'>
-                                        ↓
-                                    </span>
-                                </div>
-                                <div className='flex-1'>
-                                    <h4 className='font-bold text-gray-900 dark:text-gray-100 text-xs mb-0.5'>
-                                        Lowest
-                                    </h4>
-                                    <p className='text-lg font-bold text-green-600 dark:text-green-300'>
-                                        {worstExpense !== undefined
-                                            ? `$${worstExpense}`
-                                            : 'No data'}
-                                    </p>
-                                </div>
-                            </div>
+                        <div className='group'>
+                            <span className='text-[9px] font-black text-zinc-700 uppercase tracking-[0.2em] block mb-1'>FLOOR_ENTRY</span>
+                            <p className='text-lg font-bold text-white tracking-widest'>
+                                {worstExpense !== undefined ? `$${worstExpense}` : '—'}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -100,31 +112,13 @@ const ExpenseStats = async () => {
     } catch (error) {
         console.error('Error fetching expense statistics:', error);
         return (
-            <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl'>
-                <div className='flex items-center gap-3 mb-6'>
-                    <div className='w-12 h-12 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                        <span className='text-white text-xl'>📊</span>
+            <div className='glass p-6 rounded-[2rem] border border-zinc-800/50'>
+                <div className='flex items-center gap-4 mb-4'>
+                    <div className='w-10 h-10 bg-zinc-800 rounded-xl flex items-center justify-center'>
+                        <span className='text-zinc-500 text-lg'>!</span>
                     </div>
-                    <div>
-                        <h3 className='text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent'>
-                            Expense Statistics
-                        </h3>
-                        <p className='text-sm text-gray-500 dark:text-gray-400 mt-1'>
-                            Your spending insights and ranges
-                        </p>
-                    </div>
-                </div>
-                <div className='bg-red-50/80 dark:bg-red-900/20 backdrop-blur-sm p-6 rounded-xl border-l-4 border-l-red-500'>
-                    <div className='flex items-center gap-3 mb-2'>
-                        <div className='w-8 h-8 bg-red-100 dark:bg-red-800 rounded-full flex items-center justify-center'>
-                            <span className='text-lg'>⚠️</span>
-                        </div>
-                        <p className='text-red-800 dark:text-red-300 font-semibold'>
-                            Unable to load expense statistics
-                        </p>
-                    </div>
-                    <p className='text-red-700 dark:text-red-400 text-sm ml-11'>
-                        Please try again later
+                    <p className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>
+                        Metric Initialization Failed
                     </p>
                 </div>
             </div>

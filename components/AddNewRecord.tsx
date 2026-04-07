@@ -66,20 +66,26 @@ const AddRecord = () => {
     };
 
     return (
-        <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl'>
-            <div className='flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6'>
-                <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                    <span className='text-white text-sm sm:text-lg'>💳</span>
+        <div className='glass p-8 rounded-[2rem] border border-zinc-800/50'>
+            <div className='flex items-center justify-between mb-8'>
+                <div className='flex items-center gap-4'>
+                    <div className='w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center'>
+                        <span className='text-zinc-400 text-xl font-bold'>+</span>
+                    </div>
+                    <div>
+                        <h3 className='text-xl font-bold tracking-tight text-white uppercase'>
+                            Entry Input
+                        </h3>
+                        <p className='text-xs font-bold text-zinc-500 uppercase tracking-widest mt-1'>
+                            Manual transaction logging
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight'>
-                        Add New Expense
-                    </h3>
-                    <p className='text-xs text-gray-500 dark:text-gray-400 mt-0.5'>
-                        Track your spending with AI assistance
-                    </p>
+                <div className='hidden sm:block text-[10px] font-mono text-zinc-600 tracking-[0.2em] uppercase'>
+                    savify-v1 // protocol
                 </div>
             </div>
+
             <form
                 ref={formRef}
                 onSubmit={(e) => {
@@ -87,18 +93,16 @@ const AddRecord = () => {
                     const formData = new FormData(formRef.current!);
                     clientAction(formData);
                 }}
-                className='space-y-6 sm:space-y-8'
+                className='space-y-6'
             >
-                {/* Expense Description and Date */}
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-emerald-50/50 to-green-50/50 dark:from-emerald-900/10 dark:to-green-900/10 rounded-xl border border-emerald-100/50 dark:border-emerald-800/50'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     {/* Expense Description */}
-                    <div className='space-y-1.5'>
+                    <div className='space-y-2'>
                         <label
                             htmlFor='text'
-                            className='flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 tracking-wide'
+                            className='text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest ml-1'
                         >
-                            <span className='w-1.5 h-1.5 bg-emerald-500 rounded-full'></span>
-                            Expense Description
+                            Identifier // Description
                         </label>
                         <div className='relative'>
                             <input
@@ -107,139 +111,76 @@ const AddRecord = () => {
                                 name='text'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                className='w-full pl-3 pr-12 sm:pr-14 py-2.5 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200/80 dark:border-gray-600/80 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:bg-white dark:focus:bg-gray-700/90 focus:border-emerald-400 dark:focus:border-emerald-400 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-sm shadow-sm hover:shadow-md transition-all duration-200'
-                                placeholder='Coffee, groceries, gas...'
+                                className='w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800/80 rounded-xl focus:ring-1 focus:ring-zinc-700 focus:border-zinc-600 text-white placeholder-zinc-600 text-sm transition-all duration-200 outline-none'
+                                placeholder='TRANS_DESC_REQUIRED'
                                 required
                             />
                             <button
                                 type='button'
                                 onClick={handleAISuggestCategory}
                                 disabled={isCategorizingAI || !description.trim()}
-                                className='absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-7 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 disabled:from-gray-300 disabled:to-gray-300 text-white rounded-lg text-xs font-medium flex items-center justify-center shadow-lg hover:shadow-xl disabled:shadow-none transition-all duration-200'
-                                title='AI Category Suggestion'
+                                className='absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-zinc-100 hover:bg-white disabled:bg-zinc-800 text-black disabled:text-zinc-600 rounded-lg text-[10px] font-bold uppercase transition-all duration-200 shadow-[0_0_15px_rgba(255,255,255,0.1)]'
                             >
-                                {isCategorizingAI ? (
-                                    <div className='w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
-                                ) : (
-                                    <span className='text-xs'>✨</span>
-                                )}
+                                {isCategorizingAI ? 'SYNC' : 'AI_CLASS'}
                             </button>
                         </div>
-                        {isCategorizingAI && (
-                            <div className='flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400'>
-                                <div className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse'></div>
-                                AI is analyzing your description...
-                            </div>
-                        )}
                     </div>
 
                     {/* Expense Date */}
-                    <div className='space-y-1.5'>
+                    <div className='space-y-2'>
                         <label
                             htmlFor='date'
-                            className='flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 tracking-wide'
+                            className='text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest ml-1'
                         >
-                            <span className='w-1.5 h-1.5 bg-green-500 rounded-full'></span>
-                            Expense Date
+                            Timestamp // Date
                         </label>
                         <input
                             type='date'
                             name='date'
                             id='date'
-                            className='w-full px-3 py-2.5 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200/80 dark:border-gray-600/80 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:bg-white dark:focus:bg-gray-700/90 focus:border-emerald-400 dark:focus:border-emerald-400 text-gray-900 dark:text-gray-100 text-sm shadow-sm hover:shadow-md transition-all duration-200'
+                            className='w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800/80 rounded-xl focus:ring-1 focus:ring-zinc-700 focus:border-zinc-600 text-white text-sm transition-all duration-200 outline-none'
                             required
                             onFocus={(e) => e.target.showPicker()}
                         />
                     </div>
-                </div>
 
-                {/* Category Selection and Amount */}
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-900/10 dark:to-emerald-900/10 rounded-xl border border-green-100/50 dark:border-green-800/50'>
                     {/* Category Selection */}
-                    <div className='space-y-1.5'>
+                    <div className='space-y-2'>
                         <label
                             htmlFor='category'
-                            className='flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 tracking-wide'
+                            className='text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest ml-1'
                         >
-                            <span className='w-1.5 h-1.5 bg-green-500 rounded-full'></span>
-                            Category
-                            <span className='text-xs text-gray-400 dark:text-gray-500 ml-2 font-normal hidden sm:inline'>
-                                Use the ✨ button above for AI suggestions
-                            </span>
+                            Sector // Category
                         </label>
                         <select
                             id='category'
                             name='category'
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className='w-full px-3 py-2.5 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200/80 dark:border-gray-600/80 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:bg-white dark:focus:bg-gray-700/90 focus:border-emerald-400 dark:focus:border-emerald-400 text-gray-900 dark:text-gray-100 cursor-pointer text-sm shadow-sm hover:shadow-md transition-all duration-200'
+                            className='w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800/80 rounded-xl focus:ring-1 focus:ring-zinc-700 focus:border-zinc-600 text-white text-sm transition-all duration-200 outline-none cursor-pointer appearance-none'
                             required
                         >
-                            <option
-                                value=''
-                                disabled
-                                className='text-gray-400 dark:text-gray-500'
-                            >
-                                Select category...
-                            </option>
-                            <option value='Food' className='text-gray-900 dark:text-gray-100'>
-                                🍔 Food & Dining
-                            </option>
-                            <option
-                                value='Transportation'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                🚗 Transportation
-                            </option>
-                            <option
-                                value='Shopping'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                🛒 Shopping
-                            </option>
-                            <option
-                                value='Entertainment'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                🎬 Entertainment
-                            </option>
-                            <option
-                                value='Bills'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                💡 Bills & Utilities
-                            </option>
-                            <option
-                                value='Healthcare'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                🏥 Healthcare
-                            </option>
-                            <option
-                                value='Other'
-                                className='text-gray-900 dark:text-gray-100'
-                            >
-                                📦 Other
-                            </option>
+                            <option value='' disabled className='bg-zinc-950'>SELECT_SECTOR</option>
+                            <option value='Food' className='bg-zinc-950'>FOOD_&_DINING</option>
+                            <option value='Transportation' className='bg-zinc-950'>TRANSPORTATION</option>
+                            <option value='Shopping' className='bg-zinc-950'>RETAIL_SHOPPING</option>
+                            <option value='Entertainment' className='bg-zinc-950'>ENTERTAINMENT</option>
+                            <option value='Bills' className='bg-zinc-950'>BILLS_&_UTILITIES</option>
+                            <option value='Healthcare' className='bg-zinc-950'>HEALTHCARE</option>
+                            <option value='Other' className='bg-zinc-950'>MISC_OTHER</option>
                         </select>
                     </div>
 
                     {/* Amount */}
-                    <div className='space-y-1.5'>
+                    <div className='space-y-2'>
                         <label
                             htmlFor='amount'
-                            className='flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 tracking-wide'
+                            className='text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest ml-1'
                         >
-                            <span className='w-1.5 h-1.5 bg-green-500 rounded-full'></span>
-                            Amount
-                            <span className='text-xs text-gray-400 dark:text-gray-500 ml-2 font-normal hidden sm:inline'>
-                                Enter amount between $0 and $1,000
-                            </span>
+                            Magnitude // Amount
                         </label>
                         <div className='relative'>
-                            <span className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 font-medium text-sm'>
-                                $
-                            </span>
+                            <span className='absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 font-mono text-sm'>$</span>
                             <input
                                 type='number'
                                 name='amount'
@@ -249,7 +190,7 @@ const AddRecord = () => {
                                 step='0.01'
                                 value={amount}
                                 onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
-                                className='w-full pl-6 pr-3 py-2.5 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200/80 dark:border-gray-600/80 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:bg-white dark:focus:bg-gray-700/90 focus:border-emerald-400 dark:focus:border-emerald-400 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200'
+                                className='w-full pl-8 pr-4 py-3 bg-zinc-900/50 border border-zinc-800/80 rounded-xl focus:ring-1 focus:ring-zinc-700 focus:border-zinc-600 text-white font-mono font-bold text-sm transition-all duration-200 outline-none'
                                 placeholder='0.00'
                                 required
                             />
@@ -257,48 +198,33 @@ const AddRecord = () => {
                     </div>
                 </div>
 
-                {/* Submit Button */}
+                <div className='h-px w-full bg-zinc-800/30 my-6'></div>
+
                 <button
                     type='submit'
-                    className='w-full relative overflow-hidden bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 hover:from-emerald-700 hover:via-green-600 hover:to-teal-600 text-white px-4 py-3 sm:px-5 sm:py-4 rounded-xl font-semibold shadow-xl hover:shadow-2xl group transition-all duration-300 border-2 border-transparent hover:border-white/20 text-sm sm:text-base'
+                    className='w-full py-4 bg-white hover:bg-zinc-200 text-black rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.05)] active:scale-[0.98]'
                     disabled={isLoading}
                 >
-                    <div className='relative flex items-center justify-center gap-2'>
-                        {isLoading ? (
-                            <>
-                                <div className='w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
-                                <span>Processing...</span>
-                            </>
-                        ) : (
-                            <>
-                                <span className='text-lg'>💫</span>
-                                <span>Add Expense</span>
-                            </>
-                        )}
-                    </div>
+                    {isLoading ? (
+                        <div className='flex items-center justify-center gap-3'>
+                            <div className='w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin'></div>
+                            <span className='text-sm'>EXECUTING_COMMIT</span>
+                        </div>
+                    ) : (
+                        <span className='text-sm'>COMMIT_TRANSACTION</span>
+                    )}
                 </button>
             </form>
 
-            {/* Alert Message */}
             {alertMessage && (
-                <div
-                    className={`mt-4 p-3 rounded-xl border-l-4 backdrop-blur-sm ${alertType === 'success'
-                        ? 'bg-green-50/80 dark:bg-green-900/20 border-l-green-500 text-green-800 dark:text-green-200'
-                        : 'bg-red-50/80 dark:bg-red-900/20 border-l-red-500 text-red-800 dark:text-red-200'
-                        }`}
-                >
-                    <div className='flex items-center gap-2'>
-                        <div
-                            className={`w-6 h-6 rounded-full flex items-center justify-center ${alertType === 'success'
-                                ? 'bg-green-100 dark:bg-green-800'
-                                : 'bg-red-100 dark:bg-red-800'
-                                }`}
-                        >
-                            <span className='text-sm'>
-                                {alertType === 'success' ? '✅' : '⚠️'}
-                            </span>
-                        </div>
-                        <p className='font-medium text-sm'>{alertMessage}</p>
+                <div className={`mt-6 p-4 rounded-xl border ${
+                    alertType === 'success' 
+                    ? 'bg-zinc-900/50 border-white/10 text-zinc-300' 
+                    : 'bg-zinc-900/50 border-white/5 text-zinc-400'
+                }`}>
+                    <div className='flex items-center gap-3'>
+                        <div className={`w-1.5 h-1.5 rounded-full ${alertType === 'success' ? 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'bg-white/30'}`}></div>
+                        <p className='text-[10px] font-mono tracking-wider opacity-80 uppercase'>{alertMessage}</p>
                     </div>
                 </div>
             )}

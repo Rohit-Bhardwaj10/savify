@@ -2,104 +2,91 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className='relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-900 dark:to-black border-t border-gray-700/50 dark:border-gray-600/50'>
-            {/* Gradient accent line */}
-            <div className='absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500'></div>
+        <footer className='bg-[#09090b] border-t border-zinc-900 relative overflow-hidden'>
+            {/* Subtle background glow */}
+            <div className='absolute bottom-0 right-0 w-[500px] h-[500px] bg-zinc-900/10 blur-[120px] rounded-full -mr-64 -mb-64 pointer-events-none'></div>
 
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-8'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10'>
+                <div className='grid grid-cols-1 md:grid-cols-4 gap-12 mb-20'>
                     {/* Logo and Tagline */}
-                    <div className='text-center md:text-left'>
-                        <div className='inline-flex items-center gap-2 mb-4'>
-                            <div className='w-8 h-8 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                                <span className='text-white text-lg'>💰</span>
+                    <div className='md:col-span-2'>
+                        <div className='inline-flex items-center gap-3 mb-8 group cursor-default'>
+                            <div className='w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:scale-105 transition-transform duration-300'>
+                                <span className='text-black text-xl font-black'>S</span>
                             </div>
-                            <h2 className='text-xl font-bold bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent'>
-                                Savify
+                            <h2 className='text-2xl font-black tracking-tighter text-white uppercase'>
+                                Savify<span className="text-zinc-600">.core</span>
                             </h2>
                         </div>
-                        <p className='text-gray-300 dark:text-gray-400 leading-relaxed max-w-sm'>
-                            Intelligent financial management powered by AI. Track your
-                            expenses, manage your budget, and gain insights into your spending
-                            patterns.
+                        <p className='text-zinc-500 leading-relaxed max-w-sm text-[10px] uppercase tracking-[0.2em] font-bold opacity-60'>
+                            High-fidelity financial orchestration. Developed for precision architecture and intelligent fiscal analysis.
                         </p>
                     </div>
 
                     {/* Navigation Links */}
-                    <div className='text-center md:text-left'>
-                        <h3 className='text-lg font-semibold text-gray-100 dark:text-gray-100 mb-4'>
-                            Quick Links
+                    <div>
+                        <h3 className='text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] mb-8'>
+                            SYSTEM_MAP
                         </h3>
-                        <div className='flex flex-col space-y-3'>
-                            <Link
-                                href='/'
-                                className='group inline-flex items-center gap-2 text-gray-300 dark:text-gray-300 hover:text-emerald-400 dark:hover:text-emerald-400 text-sm font-medium transition-colors duration-200'
-                            >
-                                <span className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200'></span>
-                                Home
-                            </Link>
-                            <Link
-                                href='/about'
-                                className='group inline-flex items-center gap-2 text-gray-300 dark:text-gray-300 hover:text-emerald-400 dark:hover:text-emerald-400 text-sm font-medium transition-colors duration-200'
-                            >
-                                <span className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200'></span>
-                                About
-                            </Link>
-                            <Link
-                                href='/contact'
-                                className='group inline-flex items-center gap-2 text-gray-300 dark:text-gray-300 hover:text-emerald-400 dark:hover:text-emerald-400 text-sm font-medium transition-colors duration-200'
-                            >
-                                <span className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200'></span>
-                                Contact
-                            </Link>
+                        <div className='flex flex-col space-y-4'>
+                            {[
+                                { name: 'Dashboard', href: '/' },
+                                { name: 'About_Module', href: '/about' },
+                                { name: 'Support_Link', href: '/contact' }
+                            ].map((item) => (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className='text-zinc-600 hover:text-white text-[10px] font-mono font-bold uppercase tracking-widest transition-all duration-300 w-fit'
+                                >
+                                    <span className="mr-2 opacity-30">{'>'}</span>
+                                    {item.name}
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
                     {/* Features */}
-                    <div className='text-center md:text-left'>
-                        <h3 className='text-lg font-semibold text-gray-100 dark:text-gray-100 mb-4'>
-                            Features
+                    <div>
+                        <h3 className='text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] mb-8'>
+                            PROTOCOLS
                         </h3>
-                        <div className='space-y-3'>
-                            <div className='flex items-center gap-3 text-gray-300 dark:text-gray-400 text-sm'>
-                                <div className='w-5 h-5 bg-gradient-to-br from-emerald-500 to-green-500 rounded-md flex items-center justify-center shadow-sm'>
-                                    <span className='text-white text-xs'>🤖</span>
+                        <div className='space-y-4 font-mono'>
+                            {[
+                                'Neural_Parsing',
+                                'Vector_Taxonomy',
+                                'Stat_Rendering'
+                            ].map((protocol) => (
+                                <div key={protocol} className='flex items-center gap-3 text-zinc-600 text-[10px] uppercase font-bold tracking-widest'>
+                                    <div className='w-1 h-1 bg-zinc-800 rounded-full'></div>
+                                    {protocol}
                                 </div>
-                                AI-Powered Insights
-                            </div>
-                            <div className='flex items-center gap-3 text-gray-300 dark:text-gray-400 text-sm'>
-                                <div className='w-5 h-5 bg-gradient-to-br from-green-500 to-teal-500 rounded-md flex items-center justify-center shadow-sm'>
-                                    <span className='text-white text-xs'>✨</span>
-                                </div>
-                                Smart Categorization
-                            </div>
-                            <div className='flex items-center gap-3 text-gray-300 dark:text-gray-400 text-sm'>
-                                <div className='w-5 h-5 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-md flex items-center justify-center shadow-sm'>
-                                    <span className='text-white text-xs'>📊</span>
-                                </div>
-                                Analytics Dashboard
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Divider */}
-                <div className='w-full h-px bg-gradient-to-r from-transparent via-gray-600 dark:via-gray-600 to-transparent mb-8'></div>
-
-                {/* Copyright and Social */}
-                <div className='flex flex-col md:flex-row justify-between items-center'>
-                    <div className='text-center md:text-left mb-4 md:mb-0'>
-                        <p className='text-gray-400 dark:text-gray-400 text-sm'>
-                            © {new Date().getFullYear()} Savify. All rights
-                            reserved.
+                {/* Bottom Bar */}
+                <div className='pt-10 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-8'>
+                    <div className="flex flex-col gap-2">
+                        <p className='text-zinc-700 text-[9px] font-bold tracking-[0.3em] uppercase'>
+                            © {new Date().getFullYear()} Savify // All Protocols Active
+                        </p>
+                        <p className='text-zinc-800 text-[8px] font-mono uppercase tracking-widest'>
+                            Build_Hash: {Math.random().toString(36).substring(7).toUpperCase()}
                         </p>
                     </div>
 
-                    <div className='flex items-center gap-4'>
-                        <div className='inline-flex items-center gap-2 bg-emerald-900/30 dark:bg-emerald-900/30 text-emerald-300 dark:text-emerald-300 px-3 py-1 rounded-full text-xs font-medium'>
-                            <span className='w-1.5 h-1.5 bg-emerald-400 dark:bg-emerald-400 rounded-full animate-pulse'></span>
-                            Made by <a href='https://github.com/Rohit-Bhardwaj10' className='hover:text-emerald-400'>Sorcerer_supreme</a>
-                        </div>
+                    <div className='flex items-center gap-6'>
+                        <a 
+                            href='https://github.com/Rohit-Bhardwaj10' 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='glass-lighter px-6 py-3 rounded-full border border-zinc-900 text-[9px] uppercase tracking-[0.2em] font-black text-zinc-500 hover:text-white hover:border-zinc-700 transition-all duration-500 flex items-center gap-3'
+                        >
+                            <span className='w-1.5 h-1.5 bg-zinc-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.2)]'></span>
+                            AUTH_DEV: SORCERER_SUPREME
+                        </a>
                     </div>
                 </div>
             </div>

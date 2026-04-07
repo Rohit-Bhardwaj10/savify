@@ -166,207 +166,143 @@ const AIInsights = () => {
 
     if (isLoading) {
         return (
-            <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-100/50 dark:border-gray-700/50'>
-                <div className='flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6'>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                        <span className='text-white text-sm sm:text-lg'>🤖</span>
-                    </div>
-                    <div className='flex-1'>
-                        <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                            AI Insights
-                        </h3>
-                        <p className='text-xs text-gray-500 dark:text-gray-400 mt-0.5'>
-                            Analyzing your spending patterns
-                        </p>
-                    </div>
-                    <div className='flex items-center gap-1 sm:gap-2'>
-                        <div className='w-5 h-5 sm:w-6 sm:h-6 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin'></div>
-                        <span className='text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-medium hidden sm:block'>
-                            Analyzing...
-                        </span>
+            <div className='glass p-8 rounded-[2rem] border border-zinc-800/50'>
+                <div className='flex items-center justify-between mb-8'>
+                    <div className='flex items-center gap-4'>
+                        <div className='w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]'>
+                            <span className='text-black text-xl font-bold'>A</span>
+                        </div>
+                        <div>
+                            <h3 className='text-xl font-bold tracking-tight text-white'>
+                                AI Intelligence
+                            </h3>
+                            <p className='text-xs font-bold text-zinc-500 uppercase tracking-widest mt-1 animate-pulse'>
+                                Parsing financial datasets...
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div className='space-y-3 sm:space-y-4'>
-                    {[1, 2, 3].map((i) => (
+                <div className='space-y-4'>
+                    {[1, 2].map((i) => (
                         <div
                             key={i}
-                            className='animate-pulse bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800 p-3 sm:p-4 rounded-xl border border-gray-100 dark:border-gray-600'
+                            className='glass-lighter p-6 rounded-2xl border border-zinc-700/20'
                         >
-                            <div className='flex items-start gap-3 sm:gap-4'>
-                                <div className='w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 dark:bg-gray-600 rounded-lg'></div>
-                                <div className='flex-1 space-y-2'>
-                                    <div className='h-3 bg-gray-200 dark:bg-gray-600 rounded-lg w-3/4'></div>
-                                    <div className='h-3 bg-gray-200 dark:bg-gray-600 rounded-lg w-full'></div>
-                                    <div className='h-3 bg-gray-200 dark:bg-gray-600 rounded-lg w-2/3'></div>
+                            <div className='flex gap-4 animate-pulse'>
+                                <div className='w-10 h-10 bg-zinc-800 rounded-xl'></div>
+                                <div className='flex-1 space-y-3'>
+                                    <div className='h-3 bg-zinc-800 rounded-full w-1/3'></div>
+                                    <div className='h-2 bg-zinc-800 rounded-full w-full'></div>
+                                    <div className='h-2 bg-zinc-800 rounded-full w-2/3'></div>
                                 </div>
                             </div>
                         </div>
                     ))}
-                </div>
-
-                <div className='mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100 dark:border-gray-700 text-center'>
-                    <div className='flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400'>
-                        <div className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse'></div>
-                        <span className='text-xs sm:text-sm'>
-                            AI is analyzing your financial patterns...
-                        </span>
-                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl'>
-            <div className='flex items-center justify-between mb-4 sm:mb-6'>
-                <div className='flex items-center gap-2 sm:gap-3'>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg'>
-                        <span className='text-white text-sm sm:text-lg'>🤖</span>
+        <div className='glass p-8 rounded-[2rem] border border-zinc-800/50 relative overflow-hidden'>
+            <div className='absolute top-0 right-0 w-64 h-64 bg-zinc-400/5 blur-[80px] rounded-full -mr-32 -mt-32 pointer-events-none'></div>
+
+            <div className='flex items-center justify-between mb-10'>
+                <div className='flex items-center gap-4'>
+                    <div className='w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]'>
+                        <span className='text-black text-xl font-bold'>A</span>
                     </div>
                     <div>
-                        <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                            AI Insights
+                        <h3 className='text-xl font-bold tracking-tight text-white'>
+                            AI Analytics
                         </h3>
-                        <p className='text-xs text-gray-500 dark:text-gray-400 mt-0.5'>
-                            AI financial analysis
+                        <p className='text-xs font-bold text-zinc-500 uppercase tracking-widest mt-1'>
+                            Active Protocol: Neural Insight
                         </p>
                     </div>
                 </div>
-                <div className='flex items-center gap-2 sm:gap-3'>
-                    <div className='inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-2 py-1 rounded-full text-xs font-medium'>
-                        <span className='w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full'></span>
-                        <span className='hidden sm:inline'>{formatLastUpdated()}</span>
-                        <span className='sm:hidden'>
-                            {formatLastUpdated().includes('ago')
-                                ? formatLastUpdated().replace(' ago', '')
-                                : formatLastUpdated()}
-                        </span>
-                    </div>
+                <div className='flex items-center gap-4'>
+                    <span className='text-[10px] font-black text-zinc-500 uppercase tracking-widest bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full'>
+                        Update: {formatLastUpdated()}
+                    </span>
                     <button
                         onClick={loadInsights}
-                        className='w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 hover:from-emerald-700 hover:via-green-600 hover:to-teal-600 text-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200'
+                        className='w-10 h-10 glass-lighter border border-zinc-700/50 rounded-xl flex items-center justify-center hover:border-white/50 transition-all active:scale-95'
                         disabled={isLoading}
                     >
-                        <span className='text-sm'>🔄</span>
+                        <span className='text-sm'>⚡</span>
                     </button>
                 </div>
             </div>
 
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 {insights.map((insight) => {
-                    const currentAnswer = aiAnswers.find(
-                        (a) => a.insightId === insight.id
-                    );
+                    const currentAnswer = aiAnswers.find((a) => a.insightId === insight.id);
 
                     return (
                         <div
                             key={insight.id}
-                            className={`relative overflow-hidden rounded-xl p-3 sm:p-4 border-l-4 hover:shadow-lg transition-all duration-200 ${getInsightColors(
-                                insight.type
-                            )}`}
+                            className='glass-lighter p-6 rounded-2xl border border-zinc-700/20 group hover:border-zinc-500/30 transition-all flex flex-col'
                         >
-                            <div className='flex items-start justify-between'>
-                                <div className='flex-1'>
-                                    <div className='flex items-center gap-2 sm:gap-3 mb-2'>
-                                        <div
-                                            className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center ${insight.type === 'warning'
-                                                ? 'bg-yellow-100 dark:bg-yellow-900/50'
-                                                : insight.type === 'success'
-                                                    ? 'bg-green-100 dark:bg-green-900/50'
-                                                    : insight.type === 'tip'
-                                                        ? 'bg-emerald-100 dark:bg-emerald-900/50'
-                                                        : 'bg-emerald-100 dark:bg-emerald-900/50'
-                                                }`}
-                                        >
-                                            <span className='text-sm sm:text-lg'>
-                                                {getInsightIcon(insight.type)}
-                                            </span>
-                                        </div>
+                            <div className='flex items-center gap-3 mb-4'>
+                                <div className='w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-sm font-bold text-white group-hover:scale-110 transition-transform'>
+                                    {getInsightIcon(insight.type)}
+                                </div>
+                                <h4 className='font-bold text-white text-sm tracking-tight'>
+                                    {insight.title}
+                                </h4>
+                            </div>
+
+                            <p className='text-zinc-500 text-xs leading-relaxed mb-6 font-medium'>
+                                {insight.message}
+                            </p>
+
+                            {insight.action && (
+                                <button
+                                    onClick={() => handleActionClick(insight)}
+                                    className={`mt-auto w-full py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+                                        currentAnswer 
+                                        ? 'bg-white text-black' 
+                                        : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'
+                                    }`}
+                                >
+                                    {currentAnswer?.isLoading ? (
+                                        <div className='w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin'></div>
+                                    ) : (
+                                        <>
+                                            {insight.action}
+                                            <span>→</span>
+                                        </>
+                                    )}
+                                </button>
+                            )}
+
+                            {currentAnswer && (
+                                <div className='mt-4 p-4 bg-black/40 rounded-xl border border-zinc-800/50'>
+                                    <div className='flex gap-3'>
+                                        <div className='w-1 h-full bg-zinc-600 rounded-full'></div>
                                         <div className='flex-1'>
-                                            <h4 className='font-bold text-gray-900 dark:text-gray-100 text-sm mb-0.5'>
-                                                {insight.title}
-                                            </h4>
-                                            {insight.confidence && insight.confidence < 0.8 && (
-                                                <span className='inline-block px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 rounded-full text-xs font-medium'>
-                                                    Preliminary
-                                                </span>
+                                            <p className='text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-2'>
+                                                System Response
+                                            </p>
+                                            {currentAnswer.isLoading ? (
+                                                <div className='space-y-2'>
+                                                    <div className='h-1.5 bg-zinc-800 rounded-full w-full animate-pulse'></div>
+                                                    <div className='h-1.5 bg-zinc-800 rounded-full w-2/3 animate-pulse'></div>
+                                                </div>
+                                            ) : (
+                                                <p className='text-zinc-400 text-[11px] leading-relaxed font-medium italic'>
+                                                    "{currentAnswer.answer}"
+                                                </p>
                                             )}
                                         </div>
                                     </div>
-                                    <p className='text-gray-700 dark:text-gray-300 text-xs leading-relaxed mb-3'>
-                                        {insight.message}
-                                    </p>
-                                    {insight.action && (
-                                        <div className='text-left'>
-                                            <span
-                                                onClick={() => handleActionClick(insight)}
-                                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium text-xs cursor-pointer transition-all duration-200 ${getButtonColors(
-                                                    insight.type
-                                                )} hover:bg-white/50 dark:hover:bg-gray-700/50 ${currentAnswer ? 'bg-white/50 dark:bg-gray-700/50' : ''
-                                                    }`}
-                                            >
-                                                <span>{insight.action}</span>
-                                                {currentAnswer?.isLoading ? (
-                                                    <div className='w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin'></div>
-                                                ) : (
-                                                    <span className='text-xs'>
-                                                        {currentAnswer ? '↑' : '→'}
-                                                    </span>
-                                                )}
-                                            </span>
-                                        </div>
-                                    )}
-
-                                    {/* AI Answer Display */}
-                                    {currentAnswer && (
-                                        <div className='mt-3 p-3 bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-600'>
-                                            <div className='flex items-start gap-2'>
-                                                <div className='w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-lg flex items-center justify-center flex-shrink-0'>
-                                                    <span className='text-white text-xs'>🤖</span>
-                                                </div>
-                                                <div className='flex-1'>
-                                                    <h5 className='font-semibold text-gray-900 dark:text-gray-100 text-xs mb-1'>
-                                                        AI Answer:
-                                                    </h5>
-                                                    {currentAnswer.isLoading ? (
-                                                        <div className='space-y-1'>
-                                                            <div className='animate-pulse bg-gray-200 dark:bg-gray-600 h-2 rounded-lg w-full'></div>
-                                                            <div className='animate-pulse bg-gray-200 dark:bg-gray-600 h-2 rounded-lg w-3/4'></div>
-                                                            <div className='animate-pulse bg-gray-200 dark:bg-gray-600 h-2 rounded-lg w-1/2'></div>
-                                                        </div>
-                                                    ) : (
-                                                        <p className='text-gray-700 dark:text-gray-300 text-xs leading-relaxed'>
-                                                            {currentAnswer.answer}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
-                            </div>
+                            )}
                         </div>
                     );
                 })}
-            </div>
-
-            <div className='mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100 dark:border-gray-700'>
-                <div className='flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0'>
-                    <div className='flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400'>
-                        <div className='w-5 h-5 sm:w-6 sm:h-6 bg-emerald-50 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center'>
-                            <span className='text-sm'>🧠</span>
-                        </div>
-                        <span className='font-medium text-xs'>Powered by AI analysis</span>
-                    </div>
-                    <button
-                        onClick={loadInsights}
-                        className='px-3 py-1.5 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 hover:from-emerald-700 hover:via-green-600 hover:to-teal-600 text-white rounded-lg font-medium text-xs shadow-lg hover:shadow-xl transition-all duration-200'
-                    >
-                        <span className='sm:hidden'>Refresh</span>
-                        <span className='hidden sm:inline'>Refresh Insights →</span>
-                    </button>
-                </div>
             </div>
         </div>
     );

@@ -98,127 +98,95 @@ const BarChart = ({ records }: { records: Record[] }) => {
 
     const aggregatedData = aggregateByDate(records);
 
-    // Get color based on amount (since we're aggregating multiple categories)
+    // Get color based on amount - monocrome protocol theme
     const getAmountColor = (amount: number) => {
         if (amount > 200)
             return {
-                bg: 'rgba(255, 99, 132, 0.3)',
-                border: 'rgba(255, 99, 132, 0.8)',
-            }; // Red for high spending
+                bg: 'rgba(255, 255, 255, 0.8)',
+                border: 'rgba(255, 255, 255, 1)',
+            }; // High spending is white
         if (amount > 100)
             return {
-                bg: 'rgba(255, 206, 86, 0.3)',
-                border: 'rgba(255, 206, 86, 0.8)',
-            }; // Yellow for medium spending
+                bg: 'rgba(161, 161, 170, 0.6)',
+                border: 'rgba(161, 161, 170, 0.9)',
+            }; // Medium is zinc-400
         if (amount > 50)
             return {
-                bg: 'rgba(54, 162, 235, 0.3)',
-                border: 'rgba(54, 162, 235, 0.8)',
-            }; // Blue for moderate spending
+                bg: 'rgba(113, 113, 122, 0.4)',
+                border: 'rgba(113, 113, 122, 0.7)',
+            }; // Moderate is zinc-500
         return {
-            bg: 'rgba(75, 192, 192, 0.3)',
-            border: 'rgba(75, 192, 192, 0.8)',
-        }; // Green for low spending
+            bg: 'rgba(63, 63, 70, 0.3)',
+            border: 'rgba(63, 63, 70, 0.6)',
+        }; // Low is zinc-700
     };
 
     // Prepare data for the chart
     const data = {
         labels: aggregatedData.map((item) => {
-            // Format date as MM/DD for better readability
             const [, month, day] = item.date.split('-');
             return `${month}/${day}`;
         }),
         datasets: [
             {
                 data: aggregatedData.map((item) => item.amount),
-                backgroundColor: aggregatedData.map(
-                    (item) => getAmountColor(item.amount).bg
-                ),
-                borderColor: aggregatedData.map(
-                    (item) => getAmountColor(item.amount).border
-                ),
+                backgroundColor: aggregatedData.map((item) => getAmountColor(item.amount).bg),
+                borderColor: aggregatedData.map((item) => getAmountColor(item.amount).border),
                 borderWidth: 1,
-                borderRadius: 2, // Rounded bar edges
+                borderRadius: 4,
+                barThickness: isMobile ? 12 : 24,
             },
         ],
     };
 
     const options = {
         responsive: true,
-        maintainAspectRatio: false, // Allow flexible height
+        maintainAspectRatio: false,
         plugins: {
-            legend: {
-                display: false, // Remove legend
-            },
-            title: {
-                display: false, // Remove chart title
-            },
+            legend: { display: false },
+            title: { display: false },
             tooltip: {
-                backgroundColor: 'rgba(31, 41, 55, 0.95)',
-                titleColor: '#f9fafb',
-                bodyColor: '#374151',
-                borderColor: '#374151',
+                backgroundColor: '#09090b',
+                titleColor: '#ffffff',
+                bodyColor: '#a1a1aa',
+                borderColor: '#27272a',
                 borderWidth: 1,
-                cornerRadius: 8,
+                padding: 12,
+                cornerRadius: 12,
+                titleFont: { size: 12, weight: 'bold' as const },
+                bodyFont: { size: 11 },
+                usePointStyle: true,
                 callbacks: {
                     label: function (context: { dataIndex: number }) {
                         const dataIndex = context.dataIndex;
                         const item = aggregatedData[dataIndex];
-                        const categoriesText =
-                            item.categories.length > 1
-                                ? `Categories: ${item.categories.join(', ')}`
-                                : `Category: ${item.categories[0]}`;
-                        return [`Total: $${item.amount.toFixed(2)}`, categoriesText];
+                        return ` AMOUNT: $${item.amount.toFixed(2)}`;
                     },
                 },
             },
         },
         scales: {
             x: {
-                title: {
-                    display: true,
-                    text: 'Date',
-                    font: {
-                        size: isMobile ? 12 : 14,
-                        weight: 'bold' as const,
-                    },
-                    color: '#d1d5db',
-                },
+                border: { display: false },
                 ticks: {
-                    font: {
-                        size: isMobile ? 10 : 12,
-                    },
-                    color: '#9ca3af', // Gray x-axis labels
-                    maxRotation: isMobile ? 45 : 0, // Rotate labels on mobile
-                    minRotation: isMobile ? 45 : 0,
+                    font: { size: 10, family: ' Geist Mono, monospace' },
+                    color: '#71717a',
                 },
-                grid: {
-                    display: false, // Hide x-axis grid lines
-                },
+                grid: { display: false },
             },
             y: {
-                title: {
-                    display: true,
-                    text: 'Amount ($)',
-                    font: {
-                        size: isMobile ? 12 : 16, // Smaller font on mobile
-                        weight: 'bold' as const,
-                    },
-                    color: '#d1d5db',
-                },
+                border: { display: false },
                 ticks: {
-                    font: {
-                        size: isMobile ? 10 : 12, // Smaller font on mobile
-                    },
-                    color: '#9ca3af', // Gray y-axis labels
+                    font: { size: 10, family: ' Geist Mono, monospace' },
+                    color: '#71717a',
                     callback: function (value: string | number) {
-                        return '$' + value; // Add dollar sign to y-axis labels
+                        return '$' + value;
                     },
                 },
                 grid: {
-                    color: '#374151', // Dark mode grid lines
+                    color: 'rgba(39, 39, 42, 0.5)',
                 },
-                beginAtZero: true, // Start y-axis at zero for expenses
+                beginAtZero: true,
             },
         },
     };
