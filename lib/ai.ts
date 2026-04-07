@@ -76,9 +76,17 @@ export async function generateExpenseInsights(
                 .replace(/\s*```$/, '');
         }
 
-        const insights = JSON.parse(cleanedResponse);
+        interface AIResponseInsight {
+            type?: 'warning' | 'info' | 'success' | 'tip';
+            title?: string;
+            message?: string;
+            action?: string;
+            confidence?: number;
+        }
 
-        return insights.map((insight: any, index: number) => ({
+        const insights: AIResponseInsight[] = JSON.parse(cleanedResponse);
+
+        return insights.map((insight, index: number) => ({
             id: `ai-${Date.now()}-${index}`,
             type: insight.type || 'info',
             title: insight.title || 'AI Insight',

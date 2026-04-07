@@ -118,36 +118,6 @@ const AIInsights = () => {
         }
     };
 
-    const getInsightColors = (type: string) => {
-        switch (type) {
-            case 'warning':
-                return 'border-l-yellow-500 bg-yellow-50 dark:bg-yellow-900/20';
-            case 'success':
-                return 'border-l-green-500 bg-green-50 dark:bg-green-900/20';
-            case 'tip':
-                return 'border-l-emerald-500 bg-emerald-50 dark:bg-emerald-900/20';
-            case 'info':
-                return 'border-l-emerald-500 bg-emerald-50 dark:bg-emerald-900/20';
-            default:
-                return 'border-l-gray-500 bg-gray-50 dark:bg-gray-800/50';
-        }
-    };
-
-    const getButtonColors = (type: string) => {
-        switch (type) {
-            case 'warning':
-                return 'text-yellow-700 dark:text-yellow-300 hover:text-yellow-800 dark:hover:text-yellow-200';
-            case 'success':
-                return 'text-green-700 dark:text-green-300 hover:text-green-800 dark:hover:text-green-200';
-            case 'tip':
-                return 'text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200';
-            case 'info':
-                return 'text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-emerald-200';
-            default:
-                return 'text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200';
-        }
-    };
-
     const formatLastUpdated = () => {
         if (!lastUpdated) return 'Loading...';
 
@@ -293,7 +263,7 @@ const AIInsights = () => {
                                                 </div>
                                             ) : (
                                                 <p className='text-zinc-400 text-[11px] leading-relaxed font-medium italic'>
-                                                    "{currentAnswer.answer}"
+                                                    &quot;{currentAnswer.answer}&quot;
                                                 </p>
                                             )}
                                         </div>

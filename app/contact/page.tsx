@@ -100,7 +100,7 @@ const ContactPage = () => {
                             </p>
                             <div className='h-px w-12 bg-zinc-800 mx-auto' />
                             <p className='text-sm text-white italic font-mono'>
-                                "Awaiting incoming transmission. System check: OPTIMAL."
+                                &quot;Awaiting incoming transmission. System check: OPTIMAL.&quot;
                             </p>
                         </div>
                     </div>

@@ -76,7 +76,7 @@ const AboutPage = () => {
 
                     <div className='mt-16 max-w-2xl'>
                         <p className='text-lg text-zinc-500 leading-relaxed italic border-l-2 border-zinc-800 pl-8'>
-                            "Our engine leverages deep-learning architectures to revolutionize how modern individuals achieve financial equilibrium. Every data point is an opportunity for optimization."
+                            &quot;Our engine leverages deep-learning architectures to revolutionize how modern individuals achieve financial equilibrium. Every data point is an opportunity for optimization.&quot;
                         </p>
                     </div>
                 </div>

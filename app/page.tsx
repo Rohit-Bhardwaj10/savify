@@ -8,6 +8,8 @@ import { currentUser } from '@clerk/nextjs/server';
 
 import AIForecast from '@/components/AIForecast';
 
+import Image from 'next/image';
+
 export default async function HomePage() {
   const user = await currentUser();
   if (!user) {
@@ -23,9 +25,11 @@ export default async function HomePage() {
         <div className="mb-8 px-4">
           <div className='flex items-center gap-8'>
             <div className='relative'>
-              <img
+              <Image
                 src={user.imageUrl}
                 alt={`${user.firstName}'s profile`}
+                width={64}
+                height={64}
                 className='w-16 h-16 rounded-2xl border border-zinc-800 shadow-2xl grayscale hover:grayscale-0 transition-all duration-500'
               />
               <div className='absolute -bottom-1 -right-1 w-4 h-4 bg-zinc-100 rounded-full border-2 border-[#09090b] flex items-center justify-center shadow-lg'>
